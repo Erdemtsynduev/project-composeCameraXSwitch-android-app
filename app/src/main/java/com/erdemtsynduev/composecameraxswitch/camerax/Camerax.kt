@@ -13,18 +13,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.LifecycleOwner
-import com.erdemtsynduev.composecameraxswitch.camerax.ui.CameraxUiState
+import com.erdemtsynduev.composecameraxswitch.utils.ConstUtils
 import com.erdemtsynduev.composecameraxswitch.utils.getCameraProvider
 import java.util.concurrent.Executor
 
 @Composable
 fun ComposeCameraxView(
     analyzer: ImageAnalysis.Analyzer,
-    cameraxUiState: CameraxUiState,
+    isFrontCamera: Boolean = false,
 ) {
     ComposeCameraxPreview(
         analyzer = analyzer,
-        lensFacing = if (cameraxUiState.isFrontCamera) {
+        lensFacing = if (isFrontCamera) {
             CameraSelector.LENS_FACING_FRONT
         } else {
             CameraSelector.LENS_FACING_BACK
@@ -88,7 +88,7 @@ private fun setupImageAnalysis(
     analyzer: ImageAnalysis.Analyzer
 ): ImageAnalysis {
     return ImageAnalysis.Builder()
-        .setTargetResolution(Size(720, 1280))
+        .setTargetResolution(Size(ConstUtils.INPUT_WIDTH, ConstUtils.INPUT_HEIGHT))
         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
         .build()
         .apply {

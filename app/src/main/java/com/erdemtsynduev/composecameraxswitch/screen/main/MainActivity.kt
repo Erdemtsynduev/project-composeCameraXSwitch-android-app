@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
                     analyzer = {
 
                     },
-                    cameraxUiState = cameraxUiState
+                    isFrontCamera = cameraxUiState.isFrontCamera
                 )
                 SwitchCamera() {
                     viewModel.changeStateCamera(it)
